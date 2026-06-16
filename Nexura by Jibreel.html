@@ -5,275 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexura by Jibreel | פתרונות תקשורת ומחשוב</title>
     <style>
-        /* עיצוב כללי - עתידני ויוקרתי */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0d0e12;
-            color: #f1f5f9;
-            line-height: 1.6;
-        }
-
-        /* סרגל עליון */
-        header {
-            background: rgba(13, 14, 18, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #232631;
-            padding: 20px 40px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: 900;
-            background: linear-gradient(45deg, #a855f7, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            cursor: pointer;
-            letter-spacing: 1.5px;
-        }
-
-        .logo span {
-            font-size: 14px;
-            color: #94a3b8;
-            font-weight: 400;
-            margin-right: 5px;
-        }
-
-        /* ניהול מעבר דפים */
-        .page {
-            display: none;
-            padding-top: 120px;
-            min-height: 90vh;
-        }
-
-        .page.active {
-            display: block;
-            animation: pageTransition 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes pageTransition {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* --- דף הבית --- */
-        .hero {
-            text-align: center;
-            padding: 80px 20px 40px 20px;
-            background: radial-gradient(circle at center, #1e1b4b 0%, #0d0e12 70%);
-        }
-
-        .hero h1 {
-            font-size: 3.8rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: #a855f7;
-            text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #94a3b8;
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-top: 40px;
-            margin-bottom: 10px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #a855f7;
-            margin-bottom: 50px;
-            font-weight: 600;
-        }
-
-        /* גריד כרטיסי קטגוריות */
-        .grid-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-            padding: 20px;
-        }
-
-        .category-card {
-            background: #161922;
-            border: 1px solid #282e3d;
-            border-radius: 24px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: right;
-        }
-
-        .card-img {
-            width: 100%;
-            height: 230px;
-            object-fit: cover;
-            border-bottom: 1px solid #282e3d;
-            transition: transform 0.5s ease;
-        }
-
-        .card-body {
-            padding: 30px;
-        }
-
-        .card-body h3 {
-            font-size: 1.6rem;
-            color: #ffffff;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .card-body p {
-            color: #94a3b8;
-            font-size: 1rem;
-            margin-bottom: 25px;
-        }
-
-        .enter-btn {
-            background: linear-gradient(45deg, #a855f7, #3b82f6);
-            color: #ffffff;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: bold;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
-        }
-
-        .category-card:hover {
-            transform: translateY(-8px);
-            border-color: #a855f7;
-            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
-        }
-
-        .category-card:hover .card-img {
-            transform: scale(1.03);
-        }
-
-        /* --- הודעת מלאי ואזהרה --- */
-        .stock-alert {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* --- דפים פנימיים --- */
-        .container-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .back-home-btn {
-            background: #161922;
-            color: #a855f7;
-            border: 1px solid #a855f7;
-            padding: 12px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 35px;
-            display: inline-block;
-            transition: all 0.3s;
-        }
-
-        .back-home-btn:hover {
-            background: #a855f7;
-            color: #ffffff;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-        }
-
-        .inner-title {
-            font-size: 2.8rem;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0d0e12; color: #f1f5f9; line-height: 1.6; }
+        header { background: rgba(13, 14, 18, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #232631; padding: 20px 40px; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 26px; font-weight: 900; background: linear-gradient(45deg, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; letter-spacing: 1.5px; }
+        .logo span { font-size: 14px; color: #94a3b8; font-weight: 400; margin-right: 5px; }
+        .page { display: none; padding-top: 120px; min-height: 90vh; }
+        .page.active { display: block; animation: pageTransition 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes pageTransition { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .hero { text-align: center; padding: 80px 20px 40px 20px; background: radial-gradient(circle at center, #1e1b4b 0%, #0d0e12 70%); }
+        .hero h1 { font-size: 3.8rem; font-weight: 800; margin-bottom: 20px; }
+        .hero h1 span { color: #a855f7; text-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+        .hero p { font-size: 1.3rem; color: #94a3b8; max-width: 650px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-top: 40px; margin-bottom: 10px; }
+        .section-subtitle { text-align: center; color: #a855f7; margin-bottom: 50px; font-weight: 600; }
+        .grid-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; padding: 20px; }
+        .category-card { background: #161922; border: 1px solid #282e3d; border-radius: 24px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; text-align: right; }
+        .card-img { width: 100%; height: 230px; object-fit: cover; border-bottom: 1px solid #282e3d; transition: transform 0.5s ease; }
+        .card-body { padding: 30px; }
+        .card-body h3 { font-size: 1.6rem; color: #ffffff; margin-bottom: 12px; display: flex; justify-content: space-between; }
+        .card-body p { color: #94a3b8; font-size: 1rem; margin-bottom: 25px; }
+        .enter-btn { background: linear-gradient(45deg, #a855f7, #3b82f6); color: #ffffff; padding: 12px 28px; border-radius: 12px; font-weight: bold; display: inline-block; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2); }
+        .category-card:hover { transform: translateY(-8px); border-color: #a855f7; box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15); }
+        .category-card:hover .card-img { transform: scale(1.03); }
+        .stock-alert { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 15px 20px; border-radius: 12px; margin-bottom: 30px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .container-inner { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-home-btn { background: #161922; color: #a855f7; border: 1px solid #a855f7; padding: 12px 24px; border-radius: 12px; cursor: pointer; font-weight: bold; margin-bottom: 35px; display: inline-block; transition: all 0.3s; }
+        .back-home-btn:hover { background: #a855f7; color: #ffffff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+        .inner-title { font-size: 2.8rem; color: #fff; margin-bottom: 10px; }
         .inner-title span { color: #a855f7; }
-
-        .product-row {
-            background: #161922;
-            border: 1px solid #282e3d;
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
+        .product-row { background: #161922; border: 1px solid #282e3d; padding: 25px; border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .product-details h4 { font-size: 1.3rem; color: #fff; margin-bottom: 6px; }
         .product-details p { color: #94a3b8; font-size: 0.95rem; }
-
-        .whatsapp-order-btn {
-            background: #25d366;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
-            white-space: nowrap;
-        }
-
-        .whatsapp-order-btn:hover { 
-            background: #1ebd58; 
-            transform: scale(1.03);
-        }
-
-        footer {
-            background: #090a0d;
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid #232631;
-            color: #4b526d;
-            margin-top: 80px;
-        }
+        .whatsapp-order-btn { background: #25d366; color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; transition: background 0.3s, transform 0.2s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); white-space: nowrap; }
+        .whatsapp-order-btn:hover { background: #1ebd58; transform: scale(1.03); }
+        footer { background: #090a0d; padding: 40px; text-align: center; border-top: 1px solid #232631; color: #4b526d; margin-top: 80px; }
     </style>
 </head>
 <body>
 
-    <!-- סרגל עליון קבוע -->
     <header>
         <div class="logo" onclick="changePage('main-home')">NEXURA <span>by Jibreel</span></div>
     </header>
 
-    <!-- ==================== דף 1: מסך הבית הראשי ==================== -->
     <div id="main-home" class="page active">
         <section class="hero">
             <h1>NEXURA <span>by Jibreel</span></h1>
@@ -284,8 +58,6 @@
         <div class="section-subtitle">לחץ על אחת המחלקות כדי לצפות בפרטים ולבצע הזמנה</div>
 
         <div class="grid-container">
-
-            <!-- כרטיס מחשבים -->
             <div class="category-card" onclick="changePage('computers-section')">
                 <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&q=80" alt="מחשבים" class="card-img">
                 <div class="card-body">
@@ -295,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- כרטיס נתבים -->
             <div class="category-card" onclick="changePage('networking-section')">
                 <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="רשתות" class="card-img">
                 <div class="card-body">
@@ -304,22 +75,16 @@
                     <div class="enter-btn">צפה במחלקה זו &larr;</div>
                 </div>
             </div>
-
         </div>
     </div>
 
-
-    <!-- ==================== דף 2: מחלקת מחשבים פנימית ==================== -->
     <div id="computers-section" class="page">
         <div class="container-inner">
             <button class="back-home-btn" onclick="changePage('main-home')">&#10142; חזרה למסך הראשי</button>
             <h2 class="inner-title">מחלקת <span>מחשבים וחומרה</span></h2>
-            
-            <!-- הודעת חוסר זמינות במלאי -->
             <div class="stock-alert">
                 <span>⚠️</span> שימו לב: הציוד אינו זמין כרגע לאספקה מיידית מהמלאי. מי שרוצה להזמין מראש מוזמן ללחוץ על הכפתור למטה.
             </div>
-
             <div class="product-row">
                 <div class="product-details">
                     <h4>מחשב נייד Lenovo ThinkPad i7</h4>
@@ -327,29 +92,16 @@
                 </div>
                 <a href="https://wa.me/972525940084?text=שלום, הגעתי מהאתר של Nexura ואני מעוניין להזמין מראש מחשב נייד לנובו" target="_blank" class="whatsapp-order-btn">💬 הזמנה מראש בוואטסאפ</a>
             </div>
-
-            <div class="product-row">
-                <div class="product-details">
-                    <h4>מחשב נייח Dell OptiPlex לעסקים</h4>
-                    <p>מחשב קומפקטי ואמין למשרדים הדורשים עבודה רציפה ומהירה ללא תקיעות.</p>
-                </div>
-                <a href="https://wa.me/972525940084?text=שלום, הגעתי מהאתר של Nexura ואני מעוניין להזמין מראש מחשב נייח דל" target="_blank" class="whatsapp-order-btn">💬 הזמנה מראש בוואטסאפ</a>
-            </div>
         </div>
     </div>
 
-
-    <!-- ==================== דף 3: מחלקת נתבים פנימית ==================== -->
     <div id="networking-section" class="page">
         <div class="container-inner">
             <button class="back-home-btn" onclick="changePage('main-home')">&#10142; חזרה למסך הראשי</button>
             <h2 class="inner-title">מחלקת <span>נתבים ותקשורת</span></h2>
-            
-            <!-- הודעת חוסר זמינות במלאי -->
             <div class="stock-alert">
                 <span>⚠️</span> שימו לב: הציוד אינו זמין כרגע לאספקה מיידית מהמלאי. מי שרוצה להזמין מראש מוזמן ללחוץ על הכפתור למטה.
             </div>
-
             <div class="product-row">
                 <div class="product-details">
                     <h4>נתב סיב אופטי מתקדם Wi-Fi 6</h4>
@@ -357,38 +109,23 @@
                 </div>
                 <a href="https://wa.me/972525940084?text=שלום, הגעתי מהאתר של Nexura ואני מעוניין להזמין מראש נתב סיב אופטי" target="_blank" class="whatsapp-order-btn">💬 הזמנה מראש בוואטסאפ</a>
             </div>
-
-            <div class="product-row">
-                <div class="product-details">
-                    <h4>מערכת שרשור אלחוטית Mesh (זוג יחידות)</h4>
-                    <p>הפתרון המקצועי להעלמת שטחים מתים וקליטה מושלמת בכל פינה במבנה.</p>
-                </div>
-                <a href="https://wa.me/972525940084?text=שלום, הגעתי מהאתר של Nexura ואני מעוניין להזמין מראש מערכת מש" target="_blank" class="whatsapp-order-btn">💬 הזמנה מראש בוואטסאפ</a>
-            </div>
         </div>
     </div>
 
-
-    <!-- תחתית האתר -->
     <footer>
         <p>&copy; 2026 Nexura by Jibreel - פתרונות תקשורת ומחשוב. לבירורים והזמנות: 972525940084+. כל הזכויות שמורות.</p>
     </footer>
 
-    <!-- מערכת ה-JavaScript למעבר בין דפים -->
     <script>
         function changePage(pageId) {
-            // מסתיר את כל הדפים
             const pages = document.querySelectorAll('.page');
             pages.forEach(p => p.classList.remove('active'));
-
-            // מציג את הדף הנבחר
             const target = document.getElementById(pageId);
             if (target) {
                 target.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // מחזיר לראש העמוד למעלה
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
     </script>
-
 </body>
 </html>
